@@ -7,7 +7,13 @@
 #RUN mvn -f /usr/src/myapp/pom.xml clean package
  
 
-FROM smartnimbus/was8.5.5.9-profile
+#FROM smartnimbus/was8.5.5.9-profile
 #COPY --from=BUILD /usr/src/myapp/target/hello-world-war-1.0.0.war /tmp/
-COPY target/hello-world-war-1.0.5.war /tmp/
-RUN wsadmin.sh -lang jython -conntype NONE -c "AdminApp.install('/tmp/hello-world-war-1.0.0.war', '[ -appname hello-world-war-1.0.0 -contextroot /hello-world-war-1.0.0 -MapWebModToVH [[ hello-world-war-1.0.0.war hello-world-war-1.0.0.war,WEB-INF/web.xml default_host]]]')"
+#COPY target/hello-world-war-1.0.6.war /tmp/
+#RUN wsadmin.sh -lang jython -conntype NONE -c "AdminApp.install('/tmp/hello-world-war-1.0.0.war', '[ -appname hello-world-war-1.0.0 -contextroot /hello-world-war-1.0.0 -MapWebModToVH [[ hello-world-war-1.0.0.war hello-world-war-1.0.0.war,WEB-INF/web.xml default_host]]]')"
+
+
+FROM smartnimbus/was8.5.5.9-profile
+ARG warfile
+COPY target/$warfile.war /tmp/
+RUN wsadmin.sh -lang jython -conntype NONE -c "AdminApp.install('/tmp/$warfile.war', '[ -appname $warfile -contextroot /$warfile -MapWebModToVH [[ $warfile.war $warfile.war,WEB-INF/web.xml default_host]]]')"

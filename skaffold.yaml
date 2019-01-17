@@ -4,7 +4,9 @@ build:
   artifacts:
   - image: changeme
     context: .
-    docker: {}
+    docker: 
+      buildArgs:
+        warfile: 'hello-world-war-{{.VERSION}}.war'
   tagPolicy:
     envTemplate:
       template: '{{.DOCKER_REGISTRY}}/smartnimbus/eks-jx-was:{{.VERSION}}'
