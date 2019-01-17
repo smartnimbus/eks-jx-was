@@ -6,7 +6,7 @@ build:
     context: .
     docker: 
       buildArgs:
-        warfile: {{.VERSION}}
+        warfile: "hello-world-war-{{.VERSION}}"
   tagPolicy:
     envTemplate:
       template: '{{.DOCKER_REGISTRY}}/smartnimbus/eks-jx-was:{{.VERSION}}'
