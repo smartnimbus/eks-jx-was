@@ -19,5 +19,9 @@ spec:
     targetPort: {{ .Values.service.internalPort }}
     protocol: TCP
     name: http
+  - port: 443
+    targetPort: 9443
+    protocol: TCP
+    name: http-9443
   selector:
     app: {{ template "fullname" . }}

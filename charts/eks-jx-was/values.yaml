@@ -9,7 +9,7 @@ image:
 service:
   name: eks-jx-was
   type: ClusterIP
-  externalPort: 9043
+  externalPort: 80
   internalPort: 9043
   annotations:
     fabric8.io/expose: "true"
