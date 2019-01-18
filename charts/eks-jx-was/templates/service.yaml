@@ -22,6 +22,6 @@ spec:
   - port: 443
     targetPort: 9443
     protocol: TCP
-    name: http-9443
+    name: http
   selector:
     app: {{ template "fullname" . }}
