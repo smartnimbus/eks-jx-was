@@ -4,9 +4,7 @@ build:
   artifacts:
   - image: changeme
     context: .
-    docker: 
-      buildArgs:
-        warfile: "{{.VERSION}}"
+    docker: {}
   tagPolicy:
     envTemplate:
       template: '{{.DOCKER_REGISTRY}}/smartnimbus/eks-jx-was:{{.VERSION}}'
