@@ -12,11 +12,12 @@
 #COPY target/hello-world-war-1.0.6.war /tmp/
 #RUN wsadmin.sh -lang jython -conntype NONE -c "AdminApp.install('/tmp/hello-world-war-1.0.0.war', '[ -appname hello-world-war-1.0.0 -contextroot /hello-world-war-1.0.0 -MapWebModToVH [[ hello-world-war-1.0.0.war hello-world-war-1.0.0.war,WEB-INF/web.xml default_host]]]')"
 
-FROM smartnimbus/was23-demo:8.5.5.9-profile
-#FROM smartnimbus/was8.5.5.9-profile
-#ARG warfile=hello-world
-#COPY target/hello-world-war-*.war /tmp/hello-world.war
+#FROM smartnimbus/was23-demo:8.5.5.9-profile
+FROM smartnimbus/was8.5.5.9-profile
+ARG warfile=hello-world
+COPY target/hello-world-war-*.war /tmp/hello-world.war
 EXPOSE 9043/tcp
 EXPOSE 9443/tcp
+RUN wsadmin.sh -lang jython -conntype NONE -c "AdminApp.install('/tmp/hello-world.war', '[ -appname hello-world -contextroot /hello-world -MapWebModToVH [[ hello-world.war hello-world.war,WEB-INF/web.xml default_host]]]')"
 
 #RUN wsadmin.sh -lang jython -conntype NONE -c "AdminApp.install('/tmp/$warfile.war', '[ -appname $warfile -contextroot /$warfile -MapWebModToVH [[ $warfile.war $warfile.war,WEB-INF/web.xml default_host]]]')"
