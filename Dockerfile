@@ -16,8 +16,6 @@
 FROM smartnimbus/was8.5.5.9-profile
 ARG warfile=hello-world
 COPY target/hello-world-war-*.war /tmp/hello-world.war
-EXPOSE 9043/tcp
-EXPOSE 9443/tcp
 RUN wsadmin.sh -lang jython -conntype NONE -c "AdminApp.install('/tmp/hello-world.war', '[ -appname hello-world -contextroot /hello-world -MapWebModToVH [[ hello-world.war hello-world.war,WEB-INF/web.xml default_host]]]')"
 
 #RUN wsadmin.sh -lang jython -conntype NONE -c "AdminApp.install('/tmp/$warfile.war', '[ -appname $warfile -contextroot /$warfile -MapWebModToVH [[ $warfile.war $warfile.war,WEB-INF/web.xml default_host]]]')"
